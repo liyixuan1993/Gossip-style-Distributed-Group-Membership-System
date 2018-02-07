@@ -1,0 +1,79 @@
+the process of using avro : 
+english http://hadooptutorial.info/avro-schema-example-definition/ 
+        http://hadooptutorial.info/avro-serializing-and-deserializing-example-java-api/#Without_Code_generation
+chinese https://www.iteblog.com/archives/1008
+
+//https://www.tutorialspoint.com/avro/avro_schemas.htm
+https://docs.oracle.com/cd/E57769_01/html/GettingStartedGuide/avroschemas.html
+
+org.apache.avro 
+
+Avro is used to define the data schema for a record's value. This schema describes the fields allowed in the value, along with their data types.
+
+You apply a schema to the value portion of an Oracle NoSQL Database record using Avro bindings. These bindings are used to serialize values before writing them, and to deserialize values after reading them. The usage of these bindings requires your applications to use the Avro data format, which means that each stored value is associated with a schema.
+
+The use of Avro schemas allows serialized values to be stored in a very space-efficient binary format. Each value is stored without any metadata other than a small internal schema identifier, between 1 and 4 bytes in size. 
+
+Avro, being a schema-based serialization utility, accepts schemas as input. In spite of various schemas being available, Avro follows its own standards of defining schemas.
+The Avro schema is created in JavaScript Object Notation (JSON) document format, which is a lightweight text-based data interchange format. 
+
+=======================================================================================================
+{"name": "status", "type": {"type": "enum", "name": "Status", "symbols": ["ACTIVE", "SUSPECTED", "FAILED", "JOIN"]}}
+means type name is Status, it is a enum type which has symbols "ACTIVE", "SUSPECTED", "FAILED", "JOIN"
+
+Arrays
+{ " type " : " array ", " items " : " int " }
+This data type defines an array field having a single attribute items. This items attribute specifies the type of items in the array.
+
+Unions
+A union datatype is used whenever the field has one or more datatypes. They are represented as JSON arrays. For example, if a field that could be either an int or null, then the union is represented as ["int", "null"].
+
+ {"name": "sender_id", "type": ["null", "Id"], "default": null}
+ sender_id is of type Id or null, and set it as default null;
+
+{"name": "table", "type": ["null", {"type": "array", "items": "Entry"}], "default": null}
+table is of type array, which attribute in the array is Entry. or null, and set it as default null
+=======================================================================================================
+
+namespace − Describes the location in which the object resides.
+so we can just use them in our mp
+
+=======================================================================================================
+
+
+[ 
+  {
+    "namespace": "edu.illinois.cs425.team4.mp2",
+    "name": "Id",
+    "type": "record",
+    "fields":
+    [
+      {"name": "hostname", "type": "string"},
+      {"name": "port", "type": "int"},
+      {"name": "ts", "type": "long"} // creation time
+    ]
+  },
+  {
+    "namespace": "edu.illinois.cs425.team4.mp2",
+    "name": "Entry",
+    "type": "record",
+    "fields":
+    [
+      {"name": "id", "type": "Id"},
+      {"name": "status", "type": {"type": "enum", "name": "Status", "symbols": ["ACTIVE", "SUSPECTED", "FAILED", "JOIN"]}}
+    ]
+  },
+  {
+    "namespace": "edu.illinois.cs425.team4.mp2",
+    "type": "record",
+    "name": "Message",
+    "fields":
+    [
+      {"name": "type", "type": {"type": "enum", "name": "Type", "symbols": ["PING", "JOIN", "JOIN_ACK", "ACK", "TERMINATE", "CRASH"]}},
+      // sender id
+      {"name": "sender_id", "type": ["null", "Id"], "default": null},
+      // table
+      {"name": "table", "type": ["null", {"type": "array", "items": "Entry"}], "default": null}
+    ]
+  }
+]

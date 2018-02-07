@@ -1,4 +1,4 @@
-package edu.upenn.ds.team.mp2;
+package edu.upenn.ds.team.mp2.service;
 
 import edu.upenn.ds.team.utils.AvroUtils;
 import io.netty.buffer.ByteBuf;

@@ -43,7 +43,7 @@ so we can just use them in our mp
 
 [ 
   {
-    "namespace": "edu.illinois.cs425.team4.mp2",
+    "namespace": "edu.upenn.ds.team.mp2",
     "name": "Id",
     "type": "record",
     "fields":
@@ -54,7 +54,7 @@ so we can just use them in our mp
     ]
   },
   {
-    "namespace": "edu.illinois.cs425.team4.mp2",
+    "namespace": "edu.upenn.ds.team.mp2",
     "name": "Entry",
     "type": "record",
     "fields":
@@ -64,7 +64,7 @@ so we can just use them in our mp
     ]
   },
   {
-    "namespace": "edu.illinois.cs425.team4.mp2",
+    "namespace": "edu.upenn.ds.team.mp2",
     "type": "record",
     "name": "Message",
     "fields":

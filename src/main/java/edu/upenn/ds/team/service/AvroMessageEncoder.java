@@ -1,7 +1,7 @@
-package edu.illinois.cs425.team4.service;
+package edu.upenn.ds.team.mp2.service;
 
-import edu.illinois.cs425.team4.mp2.Message;
-import edu.illinois.cs425.team4.utils.AvroUtils;
+import edu.upenn.ds.team.mp2.Message;
+import edu.upenn.ds.team.utils.AvroUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.buffer.ByteBufOutputStream;
 import io.netty.channel.ChannelHandlerContext;
